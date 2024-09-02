@@ -2,6 +2,21 @@
 {
     public class Flight
     {
+        public Flight() { }
+
+        public Flight(int flightId, decimal price, string departureCountry, string destinationCountry,
+            DateTime departureDate, string departureAirport, string arrivalAirport, FlightClass @class) 
+        {
+            FlightId = flightId;
+            Price = price;
+            DepartureCountry = departureCountry;
+            DestinationCountry = destinationCountry;
+            DepartureDate = departureDate;
+            DepartureAirport = departureAirport;
+            ArrivalAirport = arrivalAirport;
+            Class = @class; 
+        }
+        
         public required int FlightId { get; set; }
         public required decimal Price { get; set; }
         public required string DepartureCountry { get; set; }

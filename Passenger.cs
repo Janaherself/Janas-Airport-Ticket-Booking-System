@@ -1,9 +1,11 @@
 ﻿namespace JanasAirportTicketBookingSystem
 {
-    public class Passenger
+    public class Passenger(string passengerName)
     {
-        public int PassengerId { get; set; }
-        public string PassengerName { get; set; }
-        public List<string> PassengerBookings { get; set; }
+
+        private static int _id = 1;
+        public int Id { get; init; } = _id++;
+        public string Name { get; set; } = passengerName;
+        public List<string>? Bookings { get; set; }
     }
 }

@@ -1,0 +1,57 @@
+﻿namespace JanasAirportTicketBookingSystem
+{
+    public class PassengerServices
+    {
+        public string BookFlight(int flightID)
+        {
+            string message = "";
+
+            ViewFlights();
+
+
+
+            return message;
+        }
+
+        public string CancelFlight(int flightID)
+        {
+            string message = "";
+
+            ViewFlights();
+
+
+
+            return message;
+        }
+
+        public string ModifyFlight(int flightID)
+        {
+            string message = "";
+
+            ViewFlights();
+
+
+
+            return message;
+        }
+
+        public void ViewFlights()
+        {    
+            FileManager fileManager = new FileManager();
+
+            if (fileManager.Flights.Count > 0)
+            {
+                foreach (Flight flight in fileManager.Flights.Values)
+                {
+                    Console.WriteLine($"Flight: {flight.FlightId}\n" +
+                        $"From {flight.DepartureAirport} in {flight.DepartureCountry}\n" +
+                        $"To {flight.ArrivalAirport} in {flight.DestinationCountry}\n" +
+                        $"Departure Date: {flight.DepartureDate}\n" +
+                        $"Class: {flight.Class}\n" +
+                        $"{flight.Price}$");
+                }
+            }
+            else { Console.WriteLine("Sorry, there are no flights currently in the system!\n"); }
+        }
+    }
+}

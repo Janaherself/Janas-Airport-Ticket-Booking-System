@@ -4,8 +4,8 @@
     {
         public int BookingId { get; set; }
         public int FlightId { get; set; }
-        public string PassengerName { get; set; }
-        public DateTime FlightDate { get; set; }
+        public int PassengerID { get; set; }
+        public DateTime BookingDate { get; set; }
 
     }
 }
