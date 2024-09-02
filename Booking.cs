@@ -6,6 +6,5 @@
         public int FlightId { get; set; }
         public int PassengerID { get; set; }
         public DateTime BookingDate { get; set; }
-
     }
 }

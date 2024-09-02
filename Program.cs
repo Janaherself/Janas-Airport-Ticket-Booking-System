@@ -41,12 +41,14 @@
 
         private static void PassengerMenu()
         {
-            PassengerServices passengerServices = new PassengerServices();
+            // this block of the code is duplicated in the ManagerMenu()
+            // but all the following lines are unrelated to be put in one reusable method
+            PassengerServices passengerServices = new();
 
             Console.Clear();
-            Console.Write("Enter your name: ");
-            string? passengerName = Console.ReadLine();
 
+            string? passengerName = ReadFromConsole.GetUserName();
+            
             Passenger passenger = new(passengerName);
 
             Console.WriteLine();
@@ -54,6 +56,7 @@
             Console.WriteLine($"Welcome {passenger.Name}!\n");
 
             bool executing = true;
+            //
 
             while (executing)
             {
@@ -67,22 +70,22 @@
                 switch (option)
                 {
                     case "1":
-                        int flightid = UserInput();
-                        passengerServices.BookFlight(flightid);
+                        int flightIDToBook = ReadFromConsole.GetFlightID();
+                        passengerServices.BookFlight(flightIDToBook);
                         break;
 
                     case "2":
-                        int flightIDToCancel = UserInput();
+                        int flightIDToCancel = ReadFromConsole.GetFlightID();
                         passengerServices.CancelFlight(flightIDToCancel);
                         break;
 
                     case "3":
-                        int flightIDToModify = UserInput();
+                        int flightIDToModify = ReadFromConsole.GetFlightID();
                         passengerServices.ModifyFlight(flightIDToModify);
                         break;
 
                     case "4":
-                        ViewBookings(passenger);
+                        passengerServices.ViewBookings(passenger);
                         break;
 
                     default:
@@ -94,19 +97,21 @@
 
         private static void ManagerMenu()
         {
-            ManagerServices managerServices = new ManagerServices();
+            //
+            ManagerServices managerServices = new();
             
             Console.Clear();
-            Console.Write("Enter your name: ");
-            string? managerName = Console.ReadLine();
 
+            string? managerName = ReadFromConsole.GetUserName();
+            
             Manager manager = new(managerName);
 
             Console.WriteLine();
-
+            
             Console.WriteLine($"Welcome {manager.Name}!\n");
 
             bool executing = true;
+            //
 
             while (executing)
             {
@@ -135,26 +140,6 @@
                         break;
                 }
             }
-        }
-
-        private static void ViewBookings(Passenger passenger)
-        {
-            if (passenger.Bookings.Count > 0)
-            {
-                foreach (string booking in passenger.Bookings)
-                {
-                    Console.WriteLine($"{booking}");
-                }
-            }
-            else { Console.WriteLine("You don't have any bookings right now\n"); }
-
-        }
-
-        public static int UserInput()
-        {
-            Console.Write("Enter Flight ID: ");
-            int flightid = Convert.ToInt32(Console.ReadLine());
-            return flightid;
         }
     }
 }

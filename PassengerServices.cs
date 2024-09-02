@@ -41,7 +41,7 @@
 
             if (fileManager.Flights.Count > 0)
             {
-                foreach (Flight flight in fileManager.Flights.Values)
+                foreach (var flight in fileManager.Flights.Values)
                 {
                     Console.WriteLine($"Flight: {flight.FlightId}\n" +
                         $"From {flight.DepartureAirport} in {flight.DepartureCountry}\n" +
@@ -52,6 +52,19 @@
                 }
             }
             else { Console.WriteLine("Sorry, there are no flights currently in the system!\n"); }
+        }
+
+        public void ViewBookings(Passenger passenger)
+        {
+            if (passenger.Bookings?.Count > 0)
+            {
+                foreach (var booking in passenger.Bookings)
+                {
+                    Console.WriteLine($"{booking.ToString()}");
+                }
+            }
+            else { Console.WriteLine("You don't have any bookings right now\n"); }
+
         }
     }
 }

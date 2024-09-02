@@ -1,6 +1,6 @@
 ﻿public enum FlightClass
 {
-    Economy,
+    First,
     Business,
-    First
+    Economy
 }
