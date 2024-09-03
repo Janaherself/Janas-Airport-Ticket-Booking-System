@@ -5,13 +5,20 @@
 
         public static void Main(String[] args)
         {
+            ShowMainMenu();
+        }
+
+        public static void ShowMainMenu()
+        {
+            Console.Clear();
+
             Console.WriteLine("Hello There!");
             bool executing = true;
 
             while (executing)
-            { 
+            {
                 Console.WriteLine("1. I'm a Passenger\n" +
-                    "2. I'm a Manager\n" + 
+                    "2. I'm a Manager\n" +
                     "3. I just want to exit!");
                 Console.Write("Choose the number of the option that best suits you: ");
                 string? user = Console.ReadLine();
@@ -51,7 +58,7 @@
             
             Passenger passenger = new(passengerName);
 
-            Console.WriteLine();
+            Console.Clear();
 
             Console.WriteLine($"Welcome {passenger.Name}!\n");
 
@@ -62,30 +69,32 @@
             {
                 Console.WriteLine("What are you up to today?");
                 Console.WriteLine("1. Book a Flight\n" +
-                    "2. Cancel a Flight\n" +
-                    "3. Modify a Flight\n" +
-                    "4. View Bookings");
+                    "2. Cancel a Booking\n" +
+                    "3. Modify a Booking\n" +
+                    "4. View Bookings\n" +
+                    "5. Go Back to The Main Menu.");
                 string? option = Console.ReadLine();
 
                 switch (option)
                 {
                     case "1":
-                        int flightIDToBook = ReadFromConsole.GetFlightID();
-                        passengerServices.BookFlight(flightIDToBook);
+                        passengerServices.BookingSection(passenger);
                         break;
 
                     case "2":
-                        int flightIDToCancel = ReadFromConsole.GetFlightID();
-                        passengerServices.CancelFlight(flightIDToCancel);
+                        passengerServices.CancelSection(passenger);
                         break;
 
                     case "3":
-                        int flightIDToModify = ReadFromConsole.GetFlightID();
-                        passengerServices.ModifyFlight(flightIDToModify);
+                        passengerServices.ModifySection(passenger);
                         break;
 
                     case "4":
                         passengerServices.ViewBookings(passenger);
+                        break;
+
+                    case "5":
+                        ShowMainMenu();
                         break;
 
                     default:
@@ -106,7 +115,7 @@
             
             Manager manager = new(managerName);
 
-            Console.WriteLine();
+            Console.Clear();
             
             Console.WriteLine($"Welcome {manager.Name}!\n");
 
@@ -118,7 +127,8 @@
                 Console.WriteLine("What are you up to today?");
                 Console.WriteLine("1. Search for a Flight.\n" +
                     "2. Import Flights Data.\n" +
-                    "3. View Validation Details.\n");
+                    "3. View Validation Details.\n" +
+                    "4. Go Back to The Main Menu.");
                 string? option = Console.ReadLine();
 
                 switch (option)
@@ -133,6 +143,10 @@
 
                     case "3":
                         managerServices.GetValidationDetails();
+                        break;
+
+                    case "4":
+                        ShowMainMenu(); 
                         break;
 
                     default:
