@@ -1,9 +1,13 @@
-﻿namespace JanasAirportTicketBookingSystem
+﻿using JanasAirportTicketBookingSystem.Main.MainOperations;
+using JanasAirportTicketBookingSystem.Manager;
+using JanasAirportTicketBookingSystem.Passenger;
+
+namespace JanasAirportTicketBookingSystem.Main
 {
     public class Program
     {
 
-        public static void Main(String[] args)
+        public static void Main(string[] args)
         {
             ShowMainMenu();
         }
@@ -41,6 +45,7 @@
 
                     default:
                         Console.WriteLine("Invalid selection! please try again.\n");
+                        Console.WriteLine("------------------------------------------\n");
                         break;
                 }
             }
@@ -48,22 +53,19 @@
 
         private static void PassengerMenu()
         {
-            // this block of the code is duplicated in the ManagerMenu()
-            // but all the following lines are unrelated to be put in one reusable method
             PassengerServices passengerServices = new();
 
             Console.Clear();
 
             string? passengerName = ReadFromConsole.GetUserName();
-            
-            Passenger passenger = new(passengerName);
+
+            Passenger.Passenger passenger = new(passengerName);
 
             Console.Clear();
 
             Console.WriteLine($"Welcome {passenger.Name}!\n");
 
             bool executing = true;
-            //
 
             while (executing)
             {
@@ -72,7 +74,7 @@
                     "2. Cancel a Booking\n" +
                     "3. Modify a Booking\n" +
                     "4. View Bookings\n" +
-                    "5. Go Back to The Main Menu.");
+                    "5. Go Back to The Main Menu");
                 string? option = Console.ReadLine();
 
                 switch (option)
@@ -99,6 +101,7 @@
 
                     default:
                         Console.WriteLine("Invalid Selection! please try again.\n");
+                        Console.WriteLine("------------------------------------------\n");
                         break;
                 }
             }
@@ -106,29 +109,26 @@
 
         private static void ManagerMenu()
         {
-            //
             ManagerServices managerServices = new();
-            
+
             Console.Clear();
 
             string? managerName = ReadFromConsole.GetUserName();
-            
-            Manager manager = new(managerName);
+
+            Manager.Manager manager = new(managerName);
 
             Console.Clear();
-            
+
             Console.WriteLine($"Welcome {manager.Name}!\n");
 
             bool executing = true;
-            //
 
             while (executing)
             {
                 Console.WriteLine("What are you up to today?");
-                Console.WriteLine("1. Search for a Flight.\n" +
-                    "2. Import Flights Data.\n" +
-                    "3. View Validation Details.\n" +
-                    "4. Go Back to The Main Menu.");
+                Console.WriteLine("1. Search for a Flight\n" +
+                    "2. Import and Validate Flights Data\n" +
+                    "3. Go Back to The Main Menu");
                 string? option = Console.ReadLine();
 
                 switch (option)
@@ -142,15 +142,12 @@
                         break;
 
                     case "3":
-                        managerServices.GetValidationDetails();
-                        break;
-
-                    case "4":
-                        ShowMainMenu(); 
+                        ShowMainMenu();
                         break;
 
                     default:
                         Console.WriteLine("Invalid Selection! please try again.\n");
+                        Console.WriteLine("------------------------------------------\n");
                         break;
                 }
             }

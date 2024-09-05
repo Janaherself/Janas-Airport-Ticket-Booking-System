@@ -1,4 +1,4 @@
-﻿namespace JanasAirportTicketBookingSystem
+﻿namespace JanasAirportTicketBookingSystem.Manager
 {
     public class Manager(string managerName)
     {
