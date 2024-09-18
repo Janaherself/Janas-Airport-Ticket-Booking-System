@@ -18,7 +18,7 @@
             return UserName;
         }
 
-        public static string GetFlightClass()
+        public static FlightClass? GetFlightClass()
         {
             Console.Write("Choose a class number:\n" +
                 "1. First\n" +
@@ -27,15 +27,15 @@
 
             var classOption = Console.ReadLine();
 
-            string flightClass = "";
+            if (string.IsNullOrWhiteSpace(classOption)) return null;
 
-            if (classOption == "1") { flightClass = "First"; }
-            else if (classOption == "2") { flightClass = "Business"; }
-            else if (classOption == "3") { flightClass = "Economy"; }
+            FlightClass? flightClass = null;
 
-            if (string.IsNullOrWhiteSpace(flightClass)) return null;
+            if (classOption == "1") { flightClass = FlightClass.First; }
+            else if (classOption == "2") { flightClass = FlightClass.Business; }
+            else if (classOption == "3") { flightClass = FlightClass.Economy; }
 
-            else return flightClass;
+            return flightClass;
         }
     }
 }

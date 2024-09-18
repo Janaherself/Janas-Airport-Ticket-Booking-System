@@ -4,9 +4,20 @@ namespace JanasAirportTicketBookingSystem.Flight
 {
     public class FlightServices
     {
+        private readonly IUserInput _userInput;
+
+        public FlightServices()
+        {
+        }
+
+        public FlightServices(IUserInput userInput)
+        {
+            _userInput = userInput;
+        }
+
         public static Dictionary<int, Flight> Flights { get; set; } = [];
 
-        public static List<Flight> FilterFlights ()
+        public List<Flight> FilterFlights ()
         {
             Dictionary<string, string> searchPrompts = new()
             {
@@ -26,7 +37,7 @@ namespace JanasAirportTicketBookingSystem.Flight
             foreach (var parameter in searchPrompts)
             {
                 Console.Write($"{parameter.Value}: ");
-                searchParameters.Add(parameter.Key, Console.ReadLine());
+                searchParameters.Add(parameter.Key, _userInput.ReadLine());
             }
 
             var query = new List<Flight>(Flights.Values);

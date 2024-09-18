@@ -5,9 +5,17 @@ namespace JanasAirportTicketBookingSystem.Passenger
 {
     public class PassengerServices
     {
+        private static IDateTimeProvider _dateTimeProvider;
+
+        public static void SetDateTimeProvider(IDateTimeProvider dateTimeProvider)
+        {
+            _dateTimeProvider = dateTimeProvider;
+        }
+
         public void BookingSection(Passenger passenger)
         {
-            var query = FlightServices.FilterFlights();
+            var flightsService = new FlightServices();
+            var query = flightsService.FilterFlights();
 
             foreach (var item in query)
             {
@@ -24,9 +32,9 @@ namespace JanasAirportTicketBookingSystem.Passenger
                 var flightClass = ReadFromConsole.GetFlightClass();
                 var flightId = ReadFromConsole.GetFlightID();
 
-                if (!string.IsNullOrEmpty(flightClass) && FlightServices.Flights.ContainsKey(flightId))
+                if (flightClass != null && FlightServices.Flights.ContainsKey(flightId))
                 {
-                    BookFlight(passenger, flightId, flightClass);
+                    BookFlight(passenger, flightId, (FlightClass)flightClass);
                 }
                 else 
                 { 
@@ -36,9 +44,9 @@ namespace JanasAirportTicketBookingSystem.Passenger
             }
         }
 
-        public static void BookFlight(Passenger passenger, int flightID, string flightclass)
+        public void BookFlight(Passenger passenger, int flightID, FlightClass flightclass)
         {
-            passenger.Bookings?.Add(new Booking.Booking(flightID, passenger.Id, flightclass, DateTime.Now));
+            passenger.Bookings?.Add(new Booking.Booking(flightID, passenger.Id, flightclass));
 
             Console.WriteLine("Booked Successfully!\n");
             Console.WriteLine("------------------------------------------\n");
@@ -65,7 +73,7 @@ namespace JanasAirportTicketBookingSystem.Passenger
             }
         }
 
-        public static void CancelBooking(int flightID, Passenger passenger)
+        public void CancelBooking(int flightID, Passenger passenger)
         {
             passenger.Bookings?.RemoveAll(item => item.FlightId == flightID);
 

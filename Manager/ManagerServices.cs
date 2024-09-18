@@ -8,7 +8,8 @@ namespace JanasAirportTicketBookingSystem.Manager
     {
         public List<Flight.Flight> FilterFlights()
         {
-            var query = FlightServices.FilterFlights();
+            var flightsService = new FlightServices();
+            var query = flightsService.FilterFlights();
 
             foreach (var item in query)
             {
