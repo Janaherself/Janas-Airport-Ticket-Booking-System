@@ -37,29 +37,39 @@ namespace JanasAirportTicketBookingSystem.Flight
             foreach (var parameter in searchPrompts)
             {
                 Console.Write($"{parameter.Value}: ");
-                searchParameters.Add(parameter.Key, _userInput.ReadLine());
+                searchParameters.Add(parameter.Key, Console.ReadLine());
             }
 
             var query = new List<Flight>(Flights.Values);
 
             if (!string.IsNullOrWhiteSpace(searchParameters["DepartureCountry"]))
-            { query = query.Where(p => p.DepartureCountry.Contains(searchParameters["DepartureCountry"],
-                StringComparison.CurrentCultureIgnoreCase)).ToList(); }
+            { 
+                query = query.Where(p => p.DepartureCountry.Contains(searchParameters["DepartureCountry"],
+                StringComparison.CurrentCultureIgnoreCase)).ToList();
+            }
 
             if (!string.IsNullOrWhiteSpace(searchParameters["DestinationCountry"]))
-            { query = query.Where(p => p.DestinationCountry.Contains(searchParameters["DestinationCountry"],
-                StringComparison.CurrentCultureIgnoreCase)).ToList(); }
+            {
+                query = query.Where(p => p.DestinationCountry.Contains(searchParameters["DestinationCountry"],
+                StringComparison.CurrentCultureIgnoreCase)).ToList();
+            }
 
             if (!string.IsNullOrWhiteSpace(searchParameters["DepartureAirport"]))
-            { query = query.Where(p => p.DepartureAirport.Contains(searchParameters["DepartureAirport"], 
-                StringComparison.CurrentCultureIgnoreCase)).ToList(); }
+            {
+                query = query.Where(p => p.DepartureAirport.Contains(searchParameters["DepartureAirport"], 
+                StringComparison.CurrentCultureIgnoreCase)).ToList();
+            }
 
             if (!string.IsNullOrWhiteSpace(searchParameters["ArrivalAirport"]))
-            { query = query.Where(p => p.ArrivalAirport.Contains(searchParameters["ArrivalAirport"],
-                StringComparison.CurrentCultureIgnoreCase)).ToList(); }
+            {
+                query = query.Where(p => p.ArrivalAirport.Contains(searchParameters["ArrivalAirport"],
+                StringComparison.CurrentCultureIgnoreCase)).ToList();
+            }
 
             if (!string.IsNullOrWhiteSpace(searchParameters["DepartureDate"]))
-            { query = query.Where(p => p.DepartureDate == Convert.ToDateTime(searchParameters["DepartureDate"])).ToList(); }
+            {
+                query = query.Where(p => p.DepartureDate == Convert.ToDateTime(searchParameters["DepartureDate"])).ToList();
+            }
 
             if (!string.IsNullOrWhiteSpace(searchParameters["Price"]))
             {

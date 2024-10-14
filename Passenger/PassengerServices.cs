@@ -46,7 +46,7 @@ namespace JanasAirportTicketBookingSystem.Passenger
 
         public void BookFlight(Passenger passenger, int flightID, FlightClass flightclass)
         {
-            passenger.Bookings?.Add(new Booking.Booking(flightID, passenger.Id, flightclass));
+            passenger.Bookings.Add(new Booking.Booking(flightID, passenger.Id, flightclass));
 
             Console.WriteLine("Booked Successfully!\n");
             Console.WriteLine("------------------------------------------\n");

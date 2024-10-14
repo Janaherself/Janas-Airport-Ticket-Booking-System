@@ -25,16 +25,10 @@
                 "2. Business\n" +
                 "3. Economy\n");
 
-            var classOption = Console.ReadLine();
+            int.TryParse(Console.ReadLine(), out int classOption);
 
-            if (string.IsNullOrWhiteSpace(classOption)) return null;
-
-            FlightClass? flightClass = null;
-
-            if (classOption == "1") { flightClass = FlightClass.First; }
-            else if (classOption == "2") { flightClass = FlightClass.Business; }
-            else if (classOption == "3") { flightClass = FlightClass.Economy; }
-
+            FlightClass? flightClass = Enum.IsDefined(typeof(FlightClass), classOption) ? (FlightClass)classOption : null;
+            
             return flightClass;
         }
     }

@@ -1,6 +1,6 @@
 ﻿namespace JanasAirportTicketBookingSystem.Passenger
 {
-    public class Passenger(string passengerName)
+    public record Passenger(string passengerName)
     {
 
         private static int _id = 1;

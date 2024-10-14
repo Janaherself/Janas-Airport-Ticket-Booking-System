@@ -20,7 +20,7 @@
         }
 
         private static int _id = 1;
-        public int BookingId { get; private set; }
+        public int BookingId { get; }
         public int FlightId { get; set; }
         public int PassengerId { get; set; }
         public FlightClass FlightClass { get; set; }
